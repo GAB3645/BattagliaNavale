@@ -66,31 +66,32 @@ public class PrimaryController {
 
     @FXML
     public void utenteSparaAllaCoordinata() {
-
-        if (!turnoUtente) return; //se non è il turno dell'utente, esce dalla funzione, sennò la esegue e spara l'utente
-
+        if (!turnoUtente) return; // Se non è il turno dell'utente, esci dalla funzione
+    
         String stringX = inputX.getText();
         String stringY = inputY.getText();
-
+    
         Integer x = Integer.parseInt(stringX);
         Integer y = Integer.parseInt(stringY);
-
+    
         String risultato = campoComputer.sparare(x, y);
         Button b = (Button) getNodeByRowColumnIndex(x + 1, y + 1, computerGrid);
         if (risultato.equals("ACQUA")) {
             b.setText("-");
             outputTestoUtente.setText("Hai sparato all'acqua");
-
         } else if (risultato.equals("COLPITO")) {
             b.setText("X");
             outputTestoUtente.setText("Hai colpito una nave del computer");
+        } else if (risultato.equals("GIOCO FINITO")) {
+            outputTestoUtente.setText("Hai vinto! Tutte le navi del computer sono state affondate");
         }
-
+    
         inputX.clear();
         inputY.clear();
-        turnoUtente = false; //setta il turno utente a false quindi tocca al computer a sparare
-        computerSparaAllaCoordinata(); //è il turno del computer
+        turnoUtente = false; // setta il turno utente a false quindi tocca al computer a sparare
+        computerSparaAllaCoordinata(); // è il turno del computer
     }
+    
 
 
     public void computerSparaAllaCoordinata() {
