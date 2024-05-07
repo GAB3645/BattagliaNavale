@@ -37,8 +37,7 @@ public class PrimaryController {
     CampoComputer campoComputer = new CampoComputer(navi);
     CampoUtente campoUtente = new CampoUtente(navi);
 
-    boolean turnoUtente = true; // Indica di chi è il turno: true per l'utente, false per il computer
-
+    boolean turnoUtente = true; // indica di chi è il turno: true per l'utente, false per il computer
 
     @FXML
     public void creaBottoni() {
@@ -46,6 +45,7 @@ public class PrimaryController {
         generaCampoBottoni(computerGrid);
     }
 
+    // funzione principale assegnata al bottone gioca
     @FXML
     public void iniziaGioco() {
         campoComputer.piazzaNaviCasuali();
@@ -60,20 +60,23 @@ public class PrimaryController {
                 griglia.add(btn, i + 1, j + 1);
                 GridPane.setHalignment(btn, HPos.CENTER);
                 GridPane.setValignment(btn, VPos.CENTER);
+                btn.setPrefHeight(200);
+                btn.setPrefWidth(200);
             }
         }
     }
 
     @FXML
     public void utenteSparaAllaCoordinata() {
-        if (!turnoUtente) return; // Se non è il turno dell'utente, esci dalla funzione
-    
+        if (!turnoUtente)
+            return; // Se non è il turno dell'utente, esci dalla funzione
+
         String stringX = inputX.getText();
         String stringY = inputY.getText();
-    
+
         Integer x = Integer.parseInt(stringX);
         Integer y = Integer.parseInt(stringY);
-    
+
         String risultato = campoComputer.sparare(x, y);
         Button b = (Button) getNodeByRowColumnIndex(x + 1, y + 1, computerGrid);
         if (risultato.equals("ACQUA")) {
@@ -85,25 +88,25 @@ public class PrimaryController {
         } else if (risultato.equals("GIOCO FINITO")) {
             outputTestoUtente.setText("Hai vinto! Tutte le navi del computer sono state affondate");
         }
-    
+
         inputX.clear();
         inputY.clear();
         turnoUtente = false; // setta il turno utente a false quindi tocca al computer a sparare
         computerSparaAllaCoordinata(); // è il turno del computer
     }
-    
-
 
     public void computerSparaAllaCoordinata() {
         Random numRandom = new Random();
 
-        if (turnoUtente) return; //se non è il turno del computer, esce dalla funzione, sennò la esegue e spara il computer
+        if (turnoUtente)
+            return; // se non è il turno del computer, esce dalla funzione, sennò la esegue e spara
+                    // il computer
 
         int x, y;
 
-            x = numRandom.nextInt(10);
-            y = numRandom.nextInt(10);
-  
+        x = numRandom.nextInt(10);
+        y = numRandom.nextInt(10);
+
         Button btn = (Button) getNodeByRowColumnIndex(x + 1, y + 1, playerGrid);
 
         String risultato = campoUtente.sparare(x, y);
@@ -116,10 +119,8 @@ public class PrimaryController {
             outputTestoComputer.setText("Il computer ha colpito una tua nave");
         }
 
-        turnoUtente = true; //setta il turno utente a true, quindi passa il turno all'utente 
+        turnoUtente = true; // setta il turno utente a true, quindi passa il turno all'utente
     }
-
-
 
     public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
         Node result = null;
