@@ -32,10 +32,10 @@ public class PrimaryController {
     @FXML
     private Label outputTestoComputer;
 
-    Navi navi = new Navi(4, 3, 3, 3, 2, 2, 2, 1, 1);
+    //Navi navi = new Navi(4, 3, 3, 3, 2, 2, 2, 1, 1);
 
-    CampoComputer campoComputer = new CampoComputer(navi);
-    CampoUtente campoUtente = new CampoUtente(navi);
+    CampoComputer campoComputer = new CampoComputer();
+    CampoUtente campoUtente = new CampoUtente();
 
     boolean turnoUtente = true; // indica di chi è il turno: true per l'utente, false per il computer
 

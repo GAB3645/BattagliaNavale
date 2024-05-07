@@ -8,9 +8,9 @@ public class CampoUtente {
     private boolean[][] grigliaUtenteLogica;
     private Navi navi;
 
-    public CampoUtente(Navi navi) {
+    public CampoUtente() {
         this.grigliaUtenteLogica = new boolean[grandezzaGriglia][grandezzaGriglia];
-        this.navi = navi;
+        this.navi = new Navi(4, 3, 3, 3, 2, 2, 2, 1, 1);
     }
 
     public void piazzaNaviCasuali() {
@@ -53,13 +53,12 @@ public class CampoUtente {
         return true;
     }
 
-
-
     public String sparare(int x, int y) {
 
         if (x >= 0 && x < grandezzaGriglia && y >= 0 && y < grandezzaGriglia) {
             if (grigliaUtenteLogica[x][y] == true) {
-                grigliaUtenteLogica[x][y] = false; // segno che la nave è stata colpita impostando quella casella della griglia su false
+                grigliaUtenteLogica[x][y] = false; // segno che la nave è stata colpita impostando quella casella della
+                                                   // griglia su false
                 return "COLPITO";
             } else {
                 return "ACQUA";
@@ -70,5 +69,3 @@ public class CampoUtente {
     }
 
 }
-    
-

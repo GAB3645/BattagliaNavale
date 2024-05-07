@@ -8,9 +8,9 @@ public class CampoComputer {
     private boolean[][] grigliaComputerLogica;
     private Navi navi;
 
-    public CampoComputer(Navi navi) {
+    public CampoComputer() {
         this.grigliaComputerLogica = new boolean[grandezzaGriglia][grandezzaGriglia];
-        this.navi = navi;
+        this.navi = new Navi(4, 3, 3, 3, 2, 2, 2, 1, 1);
     }
 
     public void piazzaNaviCasuali() {
@@ -54,13 +54,13 @@ public class CampoComputer {
         return true;
     }
 
-
     public String sparare(int x, int y) {
         if (x >= 0 && x < grandezzaGriglia && y >= 0 && y < grandezzaGriglia) {
             if (grigliaComputerLogica[x][y]) {
-                grigliaComputerLogica[x][y] = false;  // segno che la nave è stata colpita impostando quella casella della griglia su false
+                grigliaComputerLogica[x][y] = false; // segno che la nave è stata colpita impostando quella casella
+                                                     // della griglia su false
                 if (!naveRimaste()) {
-                    return "GIOCO FINITO"; 
+                    return "GIOCO FINITO";
                 }
                 return "COLPITO";
             } else {
@@ -70,7 +70,6 @@ public class CampoComputer {
             return "";
         }
     }
-
 
     private boolean naveRimaste() {
         for (int i = 0; i < grandezzaGriglia; i++) {
@@ -84,5 +83,3 @@ public class CampoComputer {
     }
 
 }
-
-
